@@ -1,0 +1,6 @@
+package pl.luncher.coreapp
+
+import io.flutter.embedding.android.FlutterActivity
+
+class MainActivity: FlutterActivity() {
+}
