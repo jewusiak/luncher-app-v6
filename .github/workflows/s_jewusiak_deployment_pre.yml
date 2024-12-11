@@ -1,0 +1,171 @@
+name: PRE Deploy to s.jewusiak.pl
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "master" ]
+
+env:
+  APP_NAME: "luncher_app_v6"
+  ENV_SUFFIX: "_pre"
+  BASE_DOMAIN: "pre.luncher.pl"
+  SWAG_NAME: "swag-luncher-core-common"
+  NET_NAME: "luncher-core-pre_net"
+
+
+  VERSION: 4.0.1
+  
+  
+  # ssh host config
+  SSH_HOST: "s.jewusiak.pl"
+  SSH_USER: "github_uploads"
+
+jobs:
+  build_app:
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Build docker Image
+        id: docker-build
+        run: 'docker build -t ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }} --file=".deployment/Dockerfile-s_pre" .'
+
+      - name: Save Docker image
+        run: 'docker save --output /tmp/${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}_image.tar ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }}'
+
+      - name: Upload Docker image to remote server
+        run: 'scp /tmp/${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}_image.tar ${{ env.SSH_USER }}@${{ env.SSH_HOST }}:images/${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}_image.tar'
+
+      - name: Load image
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker load --input images/${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}_image.tar"'
+
+  stop_old_app:
+    needs: [ build_app ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Stop old app
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker stop ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} || true"'
+
+  deploy_main_app:
+    needs: [ stop_old_app ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Run Docker application
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker run --rm -d --name ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} --net=${{ env.NET_NAME }} ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }}"'
+
+      - name: Wait for application to start
+        run: |
+          ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "
+          echo \"sleep begin\"
+          sleep 5
+          bash monitor.sh ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}
+          "
+          
+  setup-swag:
+    needs: [ deploy_main_app ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Stop Swag if exists
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker stop ${{ env.SWAG_NAME }} || true"'
+
+      - name: Remove swag config if exists
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "rm -f ~/${{ env.SWAG_NAME }}/nginx/proxy-confs/pre_s.subdomain.conf || true"'
+
+      - name: Setup Swag
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker run --rm -d --name ${{ env.SWAG_NAME }} -e PUID=1000 -e PGID=1000 -e TZ=Etc/UTC -e URL=s.jewusiak.pl -e EXTRA_DOMAINS=api.pre.luncher.pl,admin.pre.luncher.pl,pre.luncher.pl -e VALIDATION=http -e EMAIL="grzegorz@jewusiak.pl" -e CERTPROVIDER=zerossl -p "443:443" -p "80:80" -v ~/${{ env.SWAG_NAME }}:/config --net ${{ env.NET_NAME }} linuxserver/swag"'
+
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Replace placeholders in proxy config
+        run: |
+          sed -i -e 's!SRVNAME1!${{ env.BASE_DOMAIN }}!g' ./.deployment/pre_s.subdomain.conf
+          sed -i -e 's!PRXYPASS1!http://${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:80!g' ./.deployment/pre_s.subdomain.conf
+
+      - name: Insert proxy config
+        run: |
+          ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "mkdir -p ~/${{ env.SWAG_NAME }}/nginx/proxy-confs"
+          scp ./.deployment/pre_s.subdomain.conf ${{ env.SSH_USER }}@${{ env.SSH_HOST }}:~/${{ env.SWAG_NAME }}/nginx/proxy-confs/
+
+      - name: Restart Swag
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker restart ${{ env.SWAG_NAME }}"'
+  
+  
+  cleanup_docker_imgs:
+    needs: [ setup-swag ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Remove dangling Docker images
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker image prune -f || true"'
+  
+  cleanup_imgs_upload_dir:
+    needs: [ build_app ]
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set up SSH keys
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.S_JEWUSIAK_SSH_KEY }}" > ~/.ssh/id_ed25519
+          chmod 600 ~/.ssh/id_ed25519
+          ssh-keyscan s.jewusiak.pl >> ~/.ssh/known_hosts
+
+      - name: Remove dangling Docker images
+        run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "rm -rf ~/images/* || true"'
+

@@ -1,0 +1,23 @@
+name: Automatic PR to master
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ "flutterflow" ]
+
+jobs:
+  create_pr:
+    permissions:
+      contents: write
+      pull-requests: write
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: pull-request
+      uses: diillson/auto-pull-request@v1.0.1
+      with:
+        destination_branch: "master"
+        pr_title: "Automatic PR (merge flutterflow to master)"
+        pr_reviewer: "jewusiak"
+

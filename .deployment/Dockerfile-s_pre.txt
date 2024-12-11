@@ -1,0 +1,46 @@
+# Install Operating system and dependencies
+FROM ubuntu:20.04 AS build
+
+ENV DEBIAN_FRONTEND=noninteractive
+
+RUN apt-get update 
+RUN apt-get install -y curl git wget unzip libgconf-2-4 gdb libstdc++6 libglu1-mesa fonts-droid-fallback python3
+RUN apt-get clean
+
+ENV DEBIAN_FRONTEND=dialog
+#ENV PUB_HOSTED_URL=https://pub.dev
+#ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
+
+# download Flutter SDK from Flutter Github repo
+RUN git clone -b stable https://github.com/flutter/flutter.git /usr/local/flutter
+
+# Set flutter environment path
+ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
+
+# Run flutter doctor
+RUN flutter doctor
+
+# Enable flutter web
+#RUN flutter channel master
+#RUN flutter upgrade
+RUN flutter config --enable-web
+
+# Copy files to container and build
+RUN mkdir /app/
+COPY . /app/
+WORKDIR /app/
+ 
+# CONFIG ENV VARS
+#ARG LUNCHER_CORE_BASE_URI="https://core.api.pre.luncher.pl/"
+#ARG BYPASS_AUTH="false"
+
+RUN flutter build web
+
+# --dart-define=LUNCHER_CORE_BASE_URI=${LUNCHER_CORE_BASE_URI} --dart-define=BYPASS_AUTH=${BYPASS_AUTH}
+
+# Stage 2
+FROM nginx:1.21.1-alpine
+COPY --from=build /app/build/web /usr/share/nginx/html
+
+HEALTHCHECK --start-interval=3s --interval=60s --start-period=20s --timeout=5s --retries=10 \
+  CMD curl -s http://localhost >/dev/null || exit 1
