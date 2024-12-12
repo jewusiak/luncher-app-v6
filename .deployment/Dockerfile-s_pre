@@ -12,7 +12,8 @@ ENV DEBIAN_FRONTEND=dialog
 #ENV FLUTTER_STORAGE_BASE_URL=https://storage.flutter-io.cn
 
 # download Flutter SDK from Flutter Github repo
-RUN git clone -b stable https://github.com/flutter/flutter.git /usr/local/flutter
+#                \/ either 'stable' or version
+RUN git clone -b 3.24.2 https://github.com/flutter/flutter.git /usr/local/flutter
 
 # Set flutter environment path
 ENV PATH="/usr/local/flutter/bin:/usr/local/flutter/bin/cache/dart-sdk/bin:${PATH}"
