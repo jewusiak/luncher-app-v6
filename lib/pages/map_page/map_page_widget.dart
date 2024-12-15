@@ -187,31 +187,37 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                             showTraffic: false,
                             centerMapOnMarkerTap: true,
                           ),
-                          Align(
-                            alignment: const AlignmentDirectional(-1.0, 1.0),
-                            child: PointerInterceptor(
-                              intercepting: isWeb,
-                              child: Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
-                                    20.0, 0.0, 0.0, 20.0),
-                                child: FlutterFlowIconButton(
-                                  borderRadius: 30.0,
-                                  buttonSize: 50.0,
-                                  fillColor:
-                                      FlutterFlowTheme.of(context).primary,
-                                  icon: Icon(
-                                    Icons.filter_list,
-                                    color: FlutterFlowTheme.of(context).info,
-                                    size: 24.0,
+                          if (responsiveVisibility(
+                            context: context,
+                            tablet: false,
+                            tabletLandscape: false,
+                            desktop: false,
+                          ))
+                            Align(
+                              alignment: const AlignmentDirectional(-1.0, 1.0),
+                              child: PointerInterceptor(
+                                intercepting: isWeb,
+                                child: Padding(
+                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                      20.0, 0.0, 0.0, 20.0),
+                                  child: FlutterFlowIconButton(
+                                    borderRadius: 30.0,
+                                    buttonSize: 50.0,
+                                    fillColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    icon: Icon(
+                                      Icons.filter_list,
+                                      color: FlutterFlowTheme.of(context).info,
+                                      size: 24.0,
+                                    ),
+                                    onPressed: () async {
+                                      _model.filtersOpen = true;
+                                      safeSetState(() {});
+                                    },
                                   ),
-                                  onPressed: () async {
-                                    _model.filtersOpen = true;
-                                    safeSetState(() {});
-                                  },
                                 ),
                               ),
                             ),
-                          ),
                           if (responsiveVisibility(
                             context: context,
                             tablet: false,
