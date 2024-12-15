@@ -13,7 +13,7 @@ class FFLocalizations {
   static FFLocalizations of(BuildContext context) =>
       Localizations.of<FFLocalizations>(context, FFLocalizations)!;
 
-  static List<String> languages() => ['pl', 'en'];
+  static List<String> languages() => ['pl'];
 
   static late SharedPreferences _prefs;
   static Future initialize() async =>
@@ -39,9 +39,8 @@ class FFLocalizations {
 
   String getVariableText({
     String? plText = '',
-    String? enText = '',
   }) =>
-      [plText, enText][languageIndex] ?? '';
+      [plText][languageIndex] ?? '';
 
   static const Set<String> _languagesWithShortCode = {
     'ar',
@@ -143,126 +142,5 @@ bool _isSupportedLocale(Locale locale) {
   );
 }
 
-final kTranslationsMap = <Map<String, Map<String, String>>>[
-  // HomePage
-  {
-    'mzcm9bee': {
-      'pl': 'Witaj w\nWarszawie',
-      'en': '',
-    },
-    't6kgb2gt': {
-      'pl': 'Polecane',
-      'en': '',
-    },
-  },
-  // MapPage
-  {
-    'zvdsxdbu': {
-      'pl': 'Map',
-      'en': '',
-    },
-  },
-  // Miscellaneous
-  {
-    'ty5eamqa': {
-      'pl': '',
-      'en': '',
-    },
-    'nz872bdy': {
-      'pl': '',
-      'en': '',
-    },
-    'axlf7r4f': {
-      'pl': '',
-      'en': '',
-    },
-    'at1dx2tj': {
-      'pl': '',
-      'en': '',
-    },
-    'hvrsv5qh': {
-      'pl': '',
-      'en': '',
-    },
-    '49mlv4or': {
-      'pl': '',
-      'en': '',
-    },
-    'qs4geqs3': {
-      'pl': '',
-      'en': '',
-    },
-    'dora0gco': {
-      'pl': '',
-      'en': '',
-    },
-    'ka3ikkv0': {
-      'pl': '',
-      'en': '',
-    },
-    'x1v22ed1': {
-      'pl': '',
-      'en': '',
-    },
-    'h3dig6l6': {
-      'pl': '',
-      'en': '',
-    },
-    'cfe5rfg8': {
-      'pl': '',
-      'en': '',
-    },
-    '2g5s0pyv': {
-      'pl': '',
-      'en': '',
-    },
-    '46mwi4dv': {
-      'pl': '',
-      'en': '',
-    },
-    '9veevg1p': {
-      'pl': '',
-      'en': '',
-    },
-    'yzdu5ove': {
-      'pl': '',
-      'en': '',
-    },
-    '0i6xscxu': {
-      'pl': '',
-      'en': '',
-    },
-    'ytbsdedf': {
-      'pl': '',
-      'en': '',
-    },
-    '294kqk27': {
-      'pl': '',
-      'en': '',
-    },
-    '61k1x54e': {
-      'pl': '',
-      'en': '',
-    },
-    '3cwg9znw': {
-      'pl': '',
-      'en': '',
-    },
-    'hsxa4w10': {
-      'pl': '',
-      'en': '',
-    },
-    'ik3vwm1z': {
-      'pl': '',
-      'en': '',
-    },
-    'a3cgbc6x': {
-      'pl': '',
-      'en': '',
-    },
-    'b1v67q3f': {
-      'pl': '',
-      'en': '',
-    },
-  },
-].reduce((a, b) => a..addAll(b));
+final kTranslationsMap =
+    <Map<String, Map<String, String>>>[].reduce((a, b) => a..addAll(b));

@@ -1,5 +1,19 @@
 export '/backend/schema/util/schema_util.dart';
 
+export 'address_dto_struct.dart';
+export 'asset_dto_struct.dart';
+export 'date_time_range_dto_struct.dart';
+export 'location_dto_struct.dart';
+export 'menu_offer_dto_struct.dart';
+export 'monetary_amount_struct.dart';
+export 'opening_info_struct.dart';
+export 'owner_dto_struct.dart';
 export 'page_arrangement_dto_struct.dart';
+export 'part_dto_struct.dart';
+export 'part_option_dto_struct.dart';
+export 'place_dto_struct.dart';
+export 'place_type_dto_struct.dart';
 export 'section_dto_struct.dart';
 export 'section_element_dto_struct.dart';
+export 'week_day_time_dto_struct.dart';
+export 'week_day_time_range_dto_struct.dart';

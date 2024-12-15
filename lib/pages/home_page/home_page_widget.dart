@@ -5,6 +5,8 @@ import '/flutter_flow/flutter_flow_util.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
+import 'package:octo_image/octo_image.dart';
 import 'home_page_model.dart';
 export 'home_page_model.dart';
 
@@ -209,11 +211,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     child: Align(
                                       alignment: const AlignmentDirectional(0.0, 0.0),
                                       child: Text(
-                                        FFLocalizations.of(context).getText(
-                                          'mzcm9bee' /* Witaj w
-Warszawie */
-                                          ,
-                                        ),
+                                        'Witaj w\nWarszawie',
                                         textAlign: TextAlign.center,
                                         style: FlutterFlowTheme.of(context)
                                             .titleLarge
@@ -306,149 +304,184 @@ Warszawie */
                                                   final sectionElementsItem =
                                                       sectionElements[
                                                           sectionElementsIndex];
-                                                  return ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            10.0),
-                                                    child: Container(
-                                                      width: 200.0,
-                                                      height: 200.0,
-                                                      decoration: BoxDecoration(
-                                                        color: FlutterFlowTheme
-                                                                .of(context)
-                                                            .secondaryBackground,
-                                                        borderRadius:
-                                                            BorderRadius
-                                                                .circular(10.0),
-                                                      ),
-                                                      child: SizedBox(
-                                                        width:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .width *
-                                                                1.0,
-                                                        height:
-                                                            MediaQuery.sizeOf(
-                                                                        context)
-                                                                    .height *
-                                                                1.0,
-                                                        child: Stack(
-                                                          children: [
-                                                            Align(
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      0.0,
-                                                                      -1.0),
-                                                              child: ClipRRect(
-                                                                borderRadius:
-                                                                    BorderRadius
-                                                                        .circular(
-                                                                            0.0),
+                                                  return InkWell(
+                                                    splashColor:
+                                                        Colors.transparent,
+                                                    focusColor:
+                                                        Colors.transparent,
+                                                    hoverColor:
+                                                        Colors.transparent,
+                                                    highlightColor:
+                                                        Colors.transparent,
+                                                    onTap: () async {
+                                                      context.pushNamed(
+                                                        'PlaceDetailsPage',
+                                                        queryParameters: {
+                                                          'placeId':
+                                                              serializeParam(
+                                                            sectionElementsItem
+                                                                .sourceElementId,
+                                                            ParamType.String,
+                                                          ),
+                                                        }.withoutNulls,
+                                                      );
+                                                    },
+                                                    child: ClipRRect(
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              10.0),
+                                                      child: Container(
+                                                        width: 200.0,
+                                                        height: 200.0,
+                                                        decoration:
+                                                            BoxDecoration(
+                                                          color: FlutterFlowTheme
+                                                                  .of(context)
+                                                              .secondaryBackground,
+                                                          borderRadius:
+                                                              BorderRadius
+                                                                  .circular(
+                                                                      10.0),
+                                                        ),
+                                                        child: SizedBox(
+                                                          width:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .width *
+                                                                  1.0,
+                                                          height:
+                                                              MediaQuery.sizeOf(
+                                                                          context)
+                                                                      .height *
+                                                                  1.0,
+                                                          child: Stack(
+                                                            children: [
+                                                              Align(
+                                                                alignment:
+                                                                    const AlignmentDirectional(
+                                                                        0.0,
+                                                                        -1.0),
                                                                 child:
-                                                                    CachedNetworkImage(
-                                                                  fadeInDuration:
-                                                                      const Duration(
-                                                                          milliseconds:
-                                                                              200),
-                                                                  fadeOutDuration:
-                                                                      const Duration(
-                                                                          milliseconds:
-                                                                              200),
-                                                                  imageUrl:
+                                                                    ClipRRect(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              0.0),
+                                                                  child:
+                                                                      OctoImage(
+                                                                    placeholderBuilder: (_) =>
+                                                                        SizedBox
+                                                                            .expand(
+                                                                      child:
+                                                                          Image(
+                                                                        image: BlurHashImage(sectionElementsItem
+                                                                            .thumbnail
+                                                                            .blurHash),
+                                                                        fit: BoxFit
+                                                                            .cover,
+                                                                      ),
+                                                                    ),
+                                                                    image:
+                                                                        CachedNetworkImageProvider(
                                                                       sectionElementsItem
-                                                                          .thumbnailAccessUrl,
-                                                                  width: 200.0,
-                                                                  height: 150.0,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                  errorWidget: (context,
-                                                                          error,
-                                                                          stackTrace) =>
-                                                                      Image
-                                                                          .asset(
-                                                                    'assets/images/error_image.png',
+                                                                          .thumbnail
+                                                                          .accessUrl,
+                                                                    ),
                                                                     width:
                                                                         200.0,
                                                                     height:
                                                                         150.0,
                                                                     fit: BoxFit
                                                                         .cover,
+                                                                    errorBuilder: (context,
+                                                                            error,
+                                                                            stackTrace) =>
+                                                                        Image
+                                                                            .asset(
+                                                                      'assets/images/error_image.png',
+                                                                      width:
+                                                                          200.0,
+                                                                      height:
+                                                                          150.0,
+                                                                      fit: BoxFit
+                                                                          .cover,
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                            Align(
-                                                              alignment:
-                                                                  const AlignmentDirectional(
-                                                                      -1.0,
-                                                                      1.0),
-                                                              child: Container(
-                                                                width: MediaQuery.sizeOf(
+                                                              Align(
+                                                                alignment:
+                                                                    const AlignmentDirectional(
+                                                                        -1.0,
+                                                                        1.0),
+                                                                child:
+                                                                    Container(
+                                                                  width: MediaQuery.sizeOf(
+                                                                              context)
+                                                                          .width *
+                                                                      1.0,
+                                                                  height: 50.0,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: FlutterFlowTheme.of(
                                                                             context)
-                                                                        .width *
-                                                                    1.0,
-                                                                height: 50.0,
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  color: FlutterFlowTheme.of(
-                                                                          context)
-                                                                      .secondaryBackground,
-                                                                ),
-                                                                child: Padding(
-                                                                  padding: const EdgeInsetsDirectional
-                                                                      .fromSTEB(
-                                                                          4.0,
-                                                                          4.0,
-                                                                          4.0,
-                                                                          0.0),
-                                                                  child: Column(
-                                                                    mainAxisSize:
-                                                                        MainAxisSize
-                                                                            .min,
-                                                                    crossAxisAlignment:
-                                                                        CrossAxisAlignment
-                                                                            .start,
-                                                                    children: [
-                                                                      Text(
-                                                                        sectionElementsItem
-                                                                            .header,
-                                                                        maxLines:
-                                                                            1,
-                                                                        style: FlutterFlowTheme.of(context)
-                                                                            .bodyMedium
-                                                                            .override(
-                                                                              fontFamily: 'Inter',
-                                                                              letterSpacing: 0.0,
-                                                                              lineHeight: 0.0,
-                                                                            ),
-                                                                      ),
+                                                                        .secondaryBackground,
+                                                                  ),
+                                                                  child:
                                                                       Padding(
-                                                                        padding: const EdgeInsetsDirectional.fromSTEB(
-                                                                            0.0,
-                                                                            2.0,
-                                                                            0.0,
+                                                                    padding: const EdgeInsetsDirectional
+                                                                        .fromSTEB(
+                                                                            4.0,
+                                                                            4.0,
+                                                                            4.0,
                                                                             0.0),
-                                                                        child:
-                                                                            Text(
+                                                                    child:
+                                                                        Column(
+                                                                      mainAxisSize:
+                                                                          MainAxisSize
+                                                                              .min,
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        Text(
                                                                           sectionElementsItem
-                                                                              .subheader,
+                                                                              .header,
                                                                           maxLines:
                                                                               1,
                                                                           style: FlutterFlowTheme.of(context)
-                                                                              .bodySmall
+                                                                              .bodyMedium
                                                                               .override(
                                                                                 fontFamily: 'Inter',
                                                                                 letterSpacing: 0.0,
                                                                                 lineHeight: 0.0,
                                                                               ),
                                                                         ),
-                                                                      ),
-                                                                    ],
+                                                                        Padding(
+                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                              0.0,
+                                                                              2.0,
+                                                                              0.0,
+                                                                              0.0),
+                                                                          child:
+                                                                              Text(
+                                                                            sectionElementsItem.subheader,
+                                                                            maxLines:
+                                                                                1,
+                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                  fontFamily: 'Inter',
+                                                                                  letterSpacing: 0.0,
+                                                                                  lineHeight: 0.0,
+                                                                                ),
+                                                                          ),
+                                                                        ),
+                                                                      ],
+                                                                    ),
                                                                   ),
                                                                 ),
                                                               ),
-                                                            ),
-                                                          ],
+                                                            ],
+                                                          ),
                                                         ),
                                                       ),
                                                     ),

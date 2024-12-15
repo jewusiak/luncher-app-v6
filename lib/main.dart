@@ -71,7 +71,6 @@ class _MyAppState extends State<MyApp> {
       locale: _locale,
       supportedLocales: const [
         Locale('pl'),
-        Locale('en'),
       ],
       theme: ThemeData(
         brightness: Brightness.light,
@@ -131,33 +130,29 @@ class _NavBarPageState extends State<NavBarPage> {
         showSelectedLabels: false,
         showUnselectedLabels: false,
         type: BottomNavigationBarType.fixed,
-        items: <BottomNavigationBarItem>[
+        items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.star_border,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.star,
               size: 24.0,
             ),
-            label: FFLocalizations.of(context).getText(
-              't6kgb2gt' /* Polecane */,
-            ),
+            label: 'Polecane',
             tooltip: '',
           ),
           BottomNavigationBarItem(
-            icon: const Icon(
+            icon: Icon(
               Icons.map_outlined,
               size: 24.0,
             ),
-            activeIcon: const Icon(
+            activeIcon: Icon(
               Icons.map,
               size: 24.0,
             ),
-            label: FFLocalizations.of(context).getText(
-              'zvdsxdbu' /* Map */,
-            ),
+            label: 'Map',
             tooltip: '',
           )
         ],
