@@ -36,4 +36,19 @@ class FFAppState extends ChangeNotifier {
   void clearMainPageArrangementCache() => _mainPageArrangementManager.clear();
   void clearMainPageArrangementCacheKey(String? uniqueKey) =>
       _mainPageArrangementManager.clearRequest(uniqueKey);
+
+  final _placeTypeCacheManager = FutureRequestManager<ApiCallResponse>();
+  Future<ApiCallResponse> placeTypeCache({
+    String? uniqueQueryKey,
+    bool? overrideCache,
+    required Future<ApiCallResponse> Function() requestFn,
+  }) =>
+      _placeTypeCacheManager.performRequest(
+        uniqueQueryKey: uniqueQueryKey,
+        overrideCache: overrideCache,
+        requestFn: requestFn,
+      );
+  void clearPlaceTypeCacheCache() => _placeTypeCacheManager.clear();
+  void clearPlaceTypeCacheCacheKey(String? uniqueKey) =>
+      _placeTypeCacheManager.clearRequest(uniqueKey);
 }

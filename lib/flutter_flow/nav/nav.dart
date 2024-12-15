@@ -52,6 +52,16 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
               builder: (context, params) => params.isEmpty
                   ? const NavBarPage(initialPage: 'MapPage')
                   : const MapPageWidget(),
+            ),
+            FFRoute(
+              name: 'PlaceDetailsPage',
+              path: 'placeDetails',
+              builder: (context, params) => PlaceDetailsPageWidget(
+                placeId: params.getParam(
+                  'placeId',
+                  ParamType.String,
+                ),
+              ),
             )
           ].map((r) => r.toRoute(appStateNotifier)).toList(),
         ),
