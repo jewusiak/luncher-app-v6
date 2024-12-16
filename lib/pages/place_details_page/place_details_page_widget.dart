@@ -12,6 +12,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:octo_image/octo_image.dart';
@@ -118,10 +119,30 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                         size: 24.0,
                       ),
                       onPressed: () async {
-                        await Share.share(
-                          'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}',
-                          sharePositionOrigin: getWidgetBoundingBox(context),
-                        );
+                        if (isWeb) {
+                          await Clipboard.setData(ClipboardData(
+                              text:
+                                  'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}'));
+                          ScaffoldMessenger.of(context).showSnackBar(
+                            SnackBar(
+                              content: Text(
+                                'Skopiowano link!',
+                                style: TextStyle(
+                                  color:
+                                      FlutterFlowTheme.of(context).primaryText,
+                                ),
+                              ),
+                              duration: const Duration(milliseconds: 2000),
+                              backgroundColor:
+                                  FlutterFlowTheme.of(context).secondary,
+                            ),
+                          );
+                        } else {
+                          await Share.share(
+                            'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}',
+                            sharePositionOrigin: getWidgetBoundingBox(context),
+                          );
+                        }
                       },
                     ),
                   ),
