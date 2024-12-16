@@ -197,3 +197,18 @@ List<String>? addStringToList(
 List<String> getEmptyStringList() {
   return [];
 }
+
+String? dayOfWeekEnglishToPolish(String? english) {
+  final days = {
+    "MONDAY": "Poniedziałek",
+    "TUESDAY": "Wtorek",
+    "WEDNESDAY": "Środa",
+    "THURSDAY": "Czwartek",
+    "FRIDAY": "Piątek",
+    "SATURDAY": "Sobota",
+    "SUNDAY": "Niedziela"
+  };
+  if (english == null) return null;
+
+  return days[english];
+}
