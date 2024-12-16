@@ -42,6 +42,7 @@ RUN flutter build web
 # Stage 2
 FROM nginx:1.21.1-alpine
 COPY --from=build /app/build/web /usr/share/nginx/html
+COPY ./.deployment/default.conf /etc/nginx/conf.d/
 
 HEALTHCHECK --start-interval=3s --interval=60s --start-period=20s --timeout=5s --retries=10 \
   CMD curl -s http://localhost >/dev/null || exit 1
