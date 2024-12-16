@@ -55,7 +55,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
             ),
             FFRoute(
               name: 'PlaceDetailsPage',
-              path: 'placeDetails/:placeId',
+              path: 'placeDetails',
               builder: (context, params) => PlaceDetailsPageWidget(
                 placeId: params.getParam(
                   'placeId',
