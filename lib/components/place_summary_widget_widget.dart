@@ -91,7 +91,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                       if (widget.selectedPlace != null) {
                         context.pushNamed(
                           'PlaceDetailsPage',
-                          queryParameters: {
+                          pathParameters: {
                             'placeId': serializeParam(
                               widget.selectedPlace?.id,
                               ParamType.String,
@@ -221,7 +221,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                       if (widget.selectedPlace != null) {
                         context.pushNamed(
                           'PlaceDetailsPage',
-                          queryParameters: {
+                          pathParameters: {
                             'placeId': serializeParam(
                               widget.selectedPlace?.id,
                               ParamType.String,
