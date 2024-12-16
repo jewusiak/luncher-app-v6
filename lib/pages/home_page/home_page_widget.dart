@@ -316,7 +316,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     onTap: () async {
                                                       context.pushNamed(
                                                         'PlaceDetailsPage',
-                                                        pathParameters: {
+                                                        queryParameters: {
                                                           'placeId':
                                                               serializeParam(
                                                             sectionElementsItem
