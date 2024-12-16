@@ -236,6 +236,8 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                       widget.selectedPlace != null
                           ? widget.selectedPlace!.name
                           : ' ',
+                      textAlign: TextAlign.center,
+                      maxLines: 2,
                       style: FlutterFlowTheme.of(context).titleMedium.override(
                             fontFamily: 'Montserrat',
                             letterSpacing: 0.0,

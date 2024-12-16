@@ -12,12 +12,14 @@ class MenuOfferDtoStruct extends BaseStruct {
     List<DateTimeRangeDtoStruct>? oneTimeServingRanges,
     List<WeekDayTimeRangeDtoStruct>? recurringServingRanges,
     MonetaryAmountStruct? basePrice,
+    bool? beingServed,
   })  : _id = id,
         _name = name,
         _parts = parts,
         _oneTimeServingRanges = oneTimeServingRanges,
         _recurringServingRanges = recurringServingRanges,
-        _basePrice = basePrice;
+        _basePrice = basePrice,
+        _beingServed = beingServed;
 
   // "id" field.
   String? _id;
@@ -83,6 +85,13 @@ class MenuOfferDtoStruct extends BaseStruct {
 
   bool hasBasePrice() => _basePrice != null;
 
+  // "beingServed" field.
+  bool? _beingServed;
+  bool get beingServed => _beingServed ?? false;
+  set beingServed(bool? val) => _beingServed = val;
+
+  bool hasBeingServed() => _beingServed != null;
+
   static MenuOfferDtoStruct fromMap(Map<String, dynamic> data) =>
       MenuOfferDtoStruct(
         id: data['id'] as String?,
@@ -102,6 +111,7 @@ class MenuOfferDtoStruct extends BaseStruct {
         basePrice: data['basePrice'] is MonetaryAmountStruct
             ? data['basePrice']
             : MonetaryAmountStruct.maybeFromMap(data['basePrice']),
+        beingServed: data['beingServed'] as bool?,
       );
 
   static MenuOfferDtoStruct? maybeFromMap(dynamic data) => data is Map
@@ -117,6 +127,7 @@ class MenuOfferDtoStruct extends BaseStruct {
         'recurringServingRanges':
             _recurringServingRanges?.map((e) => e.toMap()).toList(),
         'basePrice': _basePrice?.toMap(),
+        'beingServed': _beingServed,
       }.withoutNulls;
 
   @override
@@ -147,6 +158,10 @@ class MenuOfferDtoStruct extends BaseStruct {
         'basePrice': serializeParam(
           _basePrice,
           ParamType.DataStruct,
+        ),
+        'beingServed': serializeParam(
+          _beingServed,
+          ParamType.bool,
         ),
       }.withoutNulls;
 
@@ -187,6 +202,11 @@ class MenuOfferDtoStruct extends BaseStruct {
           false,
           structBuilder: MonetaryAmountStruct.fromSerializableMap,
         ),
+        beingServed: deserializeParam(
+          data['beingServed'],
+          ParamType.bool,
+          false,
+        ),
       );
 
   @override
@@ -202,7 +222,8 @@ class MenuOfferDtoStruct extends BaseStruct {
         listEquality.equals(oneTimeServingRanges, other.oneTimeServingRanges) &&
         listEquality.equals(
             recurringServingRanges, other.recurringServingRanges) &&
-        basePrice == other.basePrice;
+        basePrice == other.basePrice &&
+        beingServed == other.beingServed;
   }
 
   @override
@@ -212,7 +233,8 @@ class MenuOfferDtoStruct extends BaseStruct {
         parts,
         oneTimeServingRanges,
         recurringServingRanges,
-        basePrice
+        basePrice,
+        beingServed
       ]);
 }
 
@@ -220,9 +242,11 @@ MenuOfferDtoStruct createMenuOfferDtoStruct({
   String? id,
   String? name,
   MonetaryAmountStruct? basePrice,
+  bool? beingServed,
 }) =>
     MenuOfferDtoStruct(
       id: id,
       name: name,
       basePrice: basePrice ?? MonetaryAmountStruct(),
+      beingServed: beingServed,
     );
