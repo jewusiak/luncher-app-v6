@@ -212,3 +212,13 @@ String? dayOfWeekEnglishToPolish(String? english) {
 
   return days[english];
 }
+
+String? replaceSchemaOfUrl(
+  String? url,
+  String? targetSchema,
+) {
+  if (url == null || targetSchema == null) {
+    return null;
+  }
+  return url.replaceRange(0, url.indexOf("://"), targetSchema);
+}
