@@ -121,8 +121,9 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                       onPressed: () async {
                         if (isWeb) {
                           await Clipboard.setData(ClipboardData(
-                              text:
-                                  'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}'));
+                              text: functions.replaceSchemaOfUrl(
+                                  'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}',
+                                  'http')!));
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
