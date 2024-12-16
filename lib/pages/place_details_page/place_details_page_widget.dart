@@ -122,7 +122,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                         if (isWeb) {
                           await Clipboard.setData(ClipboardData(
                               text:
-                                  'http://pre.luncher.pl${GoRouterState.of(context).uri.toString()}'));
+                                  'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}'));
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
                               content: Text(
@@ -139,7 +139,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                           );
                         } else {
                           await Share.share(
-                            'http://pre.luncher.pl${GoRouterState.of(context).uri.toString()}',
+                            'luncher://pre.luncher.pl${GoRouterState.of(context).uri.toString()}',
                             sharePositionOrigin: getWidgetBoundingBox(context),
                           );
                         }

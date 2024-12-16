@@ -29,7 +29,7 @@
         <string>pre.luncher.pl</string>
         <key>CFBundleURLSchemes</key>
         <array>
-        <string>http</string>
+        <string>luncher</string>
         </array>
         </dict>
     </array>
