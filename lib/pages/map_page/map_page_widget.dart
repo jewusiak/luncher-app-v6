@@ -952,68 +952,76 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                   maxHeight: 350.0,
                                 ),
                                 decoration: const BoxDecoration(),
-                                child: Builder(
-                                  builder: (context) {
-                                    if ((_model.selectedPlace != null) &&
-                                        (_model.selectedPlaceOpeningInfo !=
-                                            null)) {
-                                      return Stack(
-                                        children: [
-                                          if (responsiveVisibility(
-                                            context: context,
-                                            tablet: false,
-                                            tabletLandscape: false,
-                                            desktop: false,
-                                          ))
-                                            wrapWithModel(
-                                              model: _model
-                                                  .placeSummaryWidgetModel1,
-                                              updateCallback: () =>
-                                                  safeSetState(() {}),
-                                              child: PlaceSummaryWidgetWidget(
-                                                selectedPlace:
-                                                    _model.selectedPlace!,
-                                                openingInfo: _model
-                                                    .selectedPlaceOpeningInfo!,
+                                child: Visibility(
+                                  visible: responsiveVisibility(
+                                    context: context,
+                                    tablet: false,
+                                    tabletLandscape: false,
+                                    desktop: false,
+                                  ),
+                                  child: Builder(
+                                    builder: (context) {
+                                      if ((_model.selectedPlace != null) &&
+                                          (_model.selectedPlaceOpeningInfo !=
+                                              null)) {
+                                        return Stack(
+                                          children: [
+                                            if (responsiveVisibility(
+                                              context: context,
+                                              tablet: false,
+                                              tabletLandscape: false,
+                                              desktop: false,
+                                            ))
+                                              wrapWithModel(
+                                                model: _model
+                                                    .placeSummaryWidgetModel1,
+                                                updateCallback: () =>
+                                                    safeSetState(() {}),
+                                                child: PlaceSummaryWidgetWidget(
+                                                  selectedPlace:
+                                                      _model.selectedPlace!,
+                                                  openingInfo: _model
+                                                      .selectedPlaceOpeningInfo!,
+                                                ),
+                                              ),
+                                            Padding(
+                                              padding: const EdgeInsetsDirectional
+                                                  .fromSTEB(
+                                                      15.0, 15.0, 0.0, 0.0),
+                                              child: FlutterFlowIconButton(
+                                                borderColor: Colors.transparent,
+                                                borderRadius: 20.0,
+                                                buttonSize: 40.0,
+                                                fillColor: const Color(0x004B39EF),
+                                                icon: Icon(
+                                                  Icons.close,
+                                                  color: FlutterFlowTheme.of(
+                                                          context)
+                                                      .secondaryText,
+                                                  size: 24.0,
+                                                ),
+                                                onPressed: () async {
+                                                  _model.selectedPlace = null;
+                                                  _model.selectedPlaceOpeningInfo =
+                                                      null;
+                                                  safeSetState(() {});
+                                                },
                                               ),
                                             ),
-                                          Padding(
-                                            padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
-                                                    15.0, 15.0, 0.0, 0.0),
-                                            child: FlutterFlowIconButton(
-                                              borderColor: Colors.transparent,
-                                              borderRadius: 20.0,
-                                              buttonSize: 40.0,
-                                              fillColor: const Color(0x004B39EF),
-                                              icon: Icon(
-                                                Icons.close,
-                                                color:
-                                                    FlutterFlowTheme.of(context)
-                                                        .secondaryText,
-                                                size: 24.0,
-                                              ),
-                                              onPressed: () async {
-                                                _model.selectedPlace = null;
-                                                _model.selectedPlaceOpeningInfo =
-                                                    null;
-                                                safeSetState(() {});
-                                              },
-                                            ),
+                                          ],
+                                        );
+                                      } else {
+                                        return Container(
+                                          width: 0.0,
+                                          height: 0.0,
+                                          decoration: BoxDecoration(
+                                            color: FlutterFlowTheme.of(context)
+                                                .secondaryBackground,
                                           ),
-                                        ],
-                                      );
-                                    } else {
-                                      return Container(
-                                        width: 0.0,
-                                        height: 0.0,
-                                        decoration: BoxDecoration(
-                                          color: FlutterFlowTheme.of(context)
-                                              .secondaryBackground,
-                                        ),
-                                      );
-                                    }
-                                  },
+                                        );
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                             ),

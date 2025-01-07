@@ -27,7 +27,6 @@ class LuncherCoreAPIGETContentManagementArrangementsPrimaryGroup {
 
 class GetPrimaryArrangementContentsCall {
   Future<ApiCallResponse> call({
-    String? authorization = '',
     String? apibaseurl,
   }) async {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
@@ -40,9 +39,7 @@ class GetPrimaryArrangementContentsCall {
       callName: 'getPrimaryArrangementContents',
       apiUrl: '$baseUrl/content-management/arrangements/primary',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authorization',
-      },
+      headers: {},
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
@@ -205,7 +202,6 @@ class LuncherCoreAPIGETPlacetypeGroup {
 
 class GetAllPlaceTypesCall {
   Future<ApiCallResponse> call({
-    String? authorization = '',
     String? apibaseurl,
   }) async {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
@@ -217,9 +213,7 @@ class GetAllPlaceTypesCall {
       callName: 'getAllPlaceTypes',
       apiUrl: '$baseUrl/placetype',
       callType: ApiCallType.GET,
-      headers: {
-        'Authorization': 'Bearer $authorization',
-      },
+      headers: {},
       params: {},
       returnBody: true,
       encodeBodyUtf8: false,
