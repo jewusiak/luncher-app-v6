@@ -1,9 +1,9 @@
-name: Automatic PR (Deployment to PRE)
+name: Automatic PR (Deployment to PRO)
 
 on:
   workflow_dispatch:
   push:
-    branches: [ "flutterflow" ]
+    branches: [ "development" ]
 
 jobs:
   create_pr:
@@ -17,6 +17,6 @@ jobs:
       - name: pull-request
         uses: diillson/auto-pull-request@v1.0.1
         with:
-          destination_branch: "development"
-          pr_title: "Deployment to PRE"
+          destination_branch: "master"
+          pr_title: "Deployment to PRO"
 
