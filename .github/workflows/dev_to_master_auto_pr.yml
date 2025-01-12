@@ -2,8 +2,8 @@ name: Automatic PR (Deployment to PRO)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "development" ]
+#  push:
+#    branches: [ "development" ]
 
 jobs:
   create_pr:
