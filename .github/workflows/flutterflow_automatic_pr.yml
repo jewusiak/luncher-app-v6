@@ -2,8 +2,8 @@ name: Automatic PR (Deployment to PRE)
 
 on:
   workflow_dispatch:
-  push:
-    branches: [ "flutterflow" ]
+#  push:
+#    branches: [ "flutterflow" ]
 
 jobs:
   create_pr:
