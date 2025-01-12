@@ -1,16 +1,16 @@
-name: PRE Deploy to pre.luncher.pl
+name: PRO Deploy to luncher.pl
 
 on:
   workflow_dispatch:
   push:
-    branches: [ "development" ]
+    branches: [ "master" ]
 
 env:
   APP_NAME: "luncher_app_v6"
-  ENV_SUFFIX: "_pre"
-  BASE_DOMAIN: "pre.luncher.pl"
+  ENV_SUFFIX: "_pro"
+  BASE_DOMAIN: "luncher.pl"
   SWAG_NAME: "swag-common"
-  NET_NAME: "luncher-core-pre_net"
+  NET_NAME: "luncher-core-pro_net"
 
 
   VERSION: 4.0.1
@@ -40,7 +40,7 @@ jobs:
 
       - name: Build docker Image
         id: docker-build
-        run: 'docker build -t ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }} --file=".deployment/Dockerfile-s_pre" .'
+        run: 'docker build -t ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }} --file=".deployment/Dockerfile-s_pro" .'
 
       - name: Save Docker image
         run: 'docker save --output /tmp/${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}_image.tar ${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:${{ env.VERSION }}'
@@ -114,13 +114,13 @@ jobs:
 
       - name: Replace placeholders in proxy config
         run: |
-          sed -i -e 's!SRVNAME1!${{ env.BASE_DOMAIN }}!g' ./.deployment/pre_s.subdomain.conf
-          sed -i -e 's!PRXYPASS1!http://${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:80!g' ./.deployment/pre_s.subdomain.conf
+          sed -i -e 's!SRVNAME1!${{ env.BASE_DOMAIN }}!g' ./.deployment/pro_s.subdomain.conf
+          sed -i -e 's!PRXYPASS1!http://${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}:80!g' ./.deployment/pro_s.subdomain.conf
 
       - name: Insert proxy config
         run: |
           ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "mkdir -p ~/${{ env.SWAG_NAME }}/nginx/proxy-confs"
-          scp ./.deployment/pre_s.subdomain.conf ${{ env.SSH_USER }}@${{ env.SSH_HOST }}:~/${{ env.SWAG_NAME }}/nginx/proxy-confs/
+          scp ./.deployment/pro_s.subdomain.conf ${{ env.SSH_USER }}@${{ env.SSH_HOST }}:~/${{ env.SWAG_NAME }}/nginx/proxy-confs/
 
       - name: Restart Swag
         run: 'ssh ${{ env.SSH_USER }}@${{ env.SSH_HOST }} "docker restart ${{ env.SWAG_NAME }}"'
