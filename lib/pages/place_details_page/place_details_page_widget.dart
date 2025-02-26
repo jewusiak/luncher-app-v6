@@ -2,20 +2,16 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/no_data_available_component_widget.dart';
 import '/components/opening_time_wrap_widget.dart';
-import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:octo_image/octo_image.dart';
 import 'package:share_plus/share_plus.dart';
 import 'place_details_page_model.dart';
 export 'place_details_page_model.dart';
@@ -27,6 +23,9 @@ class PlaceDetailsPageWidget extends StatefulWidget {
   });
 
   final String? placeId;
+
+  static String routeName = 'PlaceDetailsPage';
+  static String routePath = 'placeDetails';
 
   @override
   State<PlaceDetailsPageWidget> createState() => _PlaceDetailsPageWidgetState();
@@ -96,7 +95,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                 borderRadius: 30.0,
                 borderWidth: 1.0,
                 buttonSize: 60.0,
-                icon: const Icon(
+                icon: Icon(
                   Icons.arrow_back_rounded,
                   color: Colors.white,
                   size: 30.0,
@@ -108,7 +107,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
               actions: [
                 Builder(
                   builder: (context) => Padding(
-                    padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
+                    padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 8.0, 0.0),
                     child: FlutterFlowIconButton(
                       borderRadius: 8.0,
                       buttonSize: 40.0,
@@ -133,7 +132,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                       FlutterFlowTheme.of(context).primaryText,
                                 ),
                               ),
-                              duration: const Duration(milliseconds: 2000),
+                              duration: Duration(milliseconds: 2000),
                               backgroundColor:
                                   FlutterFlowTheme.of(context).secondary,
                             ),
@@ -155,14 +154,14 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
             body: SafeArea(
               top: true,
               child: Align(
-                alignment: const AlignmentDirectional(0.0, 0.0),
+                alignment: AlignmentDirectional(0.0, 0.0),
                 child: Container(
-                  constraints: const BoxConstraints(
+                  constraints: BoxConstraints(
                     maxWidth: 1200.0,
                   ),
-                  decoration: const BoxDecoration(),
+                  decoration: BoxDecoration(),
                   child: Align(
-                    alignment: const AlignmentDirectional(0.0, -1.0),
+                    alignment: AlignmentDirectional(0.0, -1.0),
                     child: SingleChildScrollView(
                       child: Column(
                         mainAxisSize: MainAxisSize.min,
@@ -178,14 +177,14 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                             clipBehavior: Clip.none,
                             children: [
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     10.0, 0.0, 10.0, 0.0),
                                 child: Column(
                                   mainAxisSize: MainAxisSize.min,
                                   mainAxisAlignment: MainAxisAlignment.start,
                                   children: [
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 20.0, 0.0, 0.0),
                                       child: Text(
                                         valueOrDefault<String>(
@@ -220,7 +219,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                           ),
                                     ),
                                     Padding(
-                                      padding: const EdgeInsetsDirectional.fromSTEB(
+                                      padding: EdgeInsetsDirectional.fromSTEB(
                                           0.0, 10.0, 0.0, 0.0),
                                       child: Row(
                                         mainAxisSize: MainAxisSize.min,
@@ -352,14 +351,14 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                         .webpageUrl);
                                               },
                                             ),
-                                        ].divide(const SizedBox(width: 10.0)),
+                                        ].divide(SizedBox(width: 10.0)),
                                       ),
                                     ),
                                   ],
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsetsDirectional.fromSTEB(
+                                padding: EdgeInsetsDirectional.fromSTEB(
                                     0.0, 15.0, 0.0, 0.0),
                                 child: Builder(
                                   builder: (context) {
@@ -370,7 +369,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                             .toList() ??
                                         [];
 
-                                    return SizedBox(
+                                    return Container(
                                       width: 500.0,
                                       height: 247.0,
                                       child: CarouselSlider.builder(
@@ -379,85 +378,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                             (context, imagesListIndex, _) {
                                           final imagesListItem =
                                               imagesList[imagesListIndex];
-                                          return InkWell(
-                                            splashColor: Colors.transparent,
-                                            focusColor: Colors.transparent,
-                                            hoverColor: Colors.transparent,
-                                            highlightColor: Colors.transparent,
-                                            onTap: () async {
-                                              await Navigator.push(
-                                                context,
-                                                PageTransition(
-                                                  type: PageTransitionType.fade,
-                                                  child:
-                                                      FlutterFlowExpandedImageView(
-                                                    image: OctoImage(
-                                                      placeholderBuilder: (_) =>
-                                                          SizedBox.expand(
-                                                        child: Image(
-                                                          image: BlurHashImage(
-                                                              imagesListItem
-                                                                  .blurHash),
-                                                          fit: BoxFit.cover,
-                                                        ),
-                                                      ),
-                                                      image:
-                                                          CachedNetworkImageProvider(
-                                                        imagesListItem
-                                                            .accessUrl,
-                                                      ),
-                                                      fit: BoxFit.contain,
-                                                      errorBuilder: (context,
-                                                              error,
-                                                              stackTrace) =>
-                                                          Image.asset(
-                                                        'assets/images/error_image.png',
-                                                        fit: BoxFit.contain,
-                                                      ),
-                                                    ),
-                                                    allowRotation: false,
-                                                    tag: imagesListItem
-                                                        .accessUrl,
-                                                    useHeroAnimation: true,
-                                                  ),
-                                                ),
-                                              );
-                                            },
-                                            child: Hero(
-                                              tag: imagesListItem.accessUrl,
-                                              transitionOnUserGestures: true,
-                                              child: ClipRRect(
-                                                borderRadius:
-                                                    BorderRadius.circular(8.0),
-                                                child: OctoImage(
-                                                  placeholderBuilder: (_) =>
-                                                      SizedBox.expand(
-                                                    child: Image(
-                                                      image: BlurHashImage(
-                                                          imagesListItem
-                                                              .blurHash),
-                                                      fit: BoxFit.cover,
-                                                    ),
-                                                  ),
-                                                  image:
-                                                      CachedNetworkImageProvider(
-                                                    imagesListItem.accessUrl,
-                                                  ),
-                                                  width: 200.0,
-                                                  height: 105.0,
-                                                  fit: BoxFit.cover,
-                                                  errorBuilder: (context, error,
-                                                          stackTrace) =>
-                                                      Image.asset(
-                                                    'assets/images/error_image.png',
-                                                    width: 200.0,
-                                                    height: 105.0,
-                                                    fit: BoxFit.cover,
-                                                  ),
-                                                ),
-                                              ),
-                                            ),
-                                          );
+                                          return Container();
                                         },
                                         carouselController:
                                             _model.carouselController ??=
@@ -494,22 +415,22 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                 ),
                               ),
                               Container(
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                               ),
                             ],
                           ),
                           Padding(
-                            padding: const EdgeInsetsDirectional.fromSTEB(
+                            padding: EdgeInsetsDirectional.fromSTEB(
                                 10.0, 0.0, 10.0, 0.0),
                             child: Column(
                               mainAxisSize: MainAxisSize.min,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 15.0, 0.0, 0.0),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      boxShadow: const [
+                                      boxShadow: [
                                         BoxShadow(
                                           blurRadius: 3.0,
                                           color: Color(0x33000000),
@@ -550,10 +471,10 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                               ),
                                               collapsed: Container(),
                                               expanded: Align(
-                                                alignment: const AlignmentDirectional(
+                                                alignment: AlignmentDirectional(
                                                     0.0, -1.0),
                                                 child: Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 10.0, 0.0, 10.0),
                                                   child: Builder(
@@ -615,14 +536,14 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                               ),
                                                             ],
                                                           );
-                                                        }).divide(const SizedBox(
+                                                        }).divide(SizedBox(
                                                             height: 5.0)),
                                                       );
                                                     },
                                                   ),
                                                 ),
                                               ),
-                                              theme: const ExpandableThemeData(
+                                              theme: ExpandableThemeData(
                                                 tapHeaderToExpand: true,
                                                 tapBodyToExpand: false,
                                                 tapBodyToCollapse: false,
@@ -639,7 +560,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                   ),
                                 ),
                                 Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       0.0, 20.0, 0.0, 0.0),
                                   child: Text(
                                     'Oferty lunchowe',
@@ -652,12 +573,12 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                   ),
                                 ),
                                 Container(
-                                  constraints: const BoxConstraints(
+                                  constraints: BoxConstraints(
                                     maxWidth: 700.0,
                                   ),
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Padding(
-                                    padding: const EdgeInsetsDirectional.fromSTEB(
+                                    padding: EdgeInsetsDirectional.fromSTEB(
                                         0.0, 10.0, 0.0, 0.0),
                                     child: Builder(
                                       builder: (context) {
@@ -669,7 +590,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                     .toList() ??
                                                 [];
                                         if (menuOffers.isEmpty) {
-                                          return const Center(
+                                          return Center(
                                             child:
                                                 NoDataAvailableComponentWidget(
                                               message:
@@ -687,7 +608,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                 menuOffers[menuOffersIndex];
                                             return Container(
                                               decoration: BoxDecoration(
-                                                boxShadow: const [
+                                                boxShadow: [
                                                   BoxShadow(
                                                     blurRadius: 3.0,
                                                     color: Color(0x33000000),
@@ -718,7 +639,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                       child: ExpandablePanel(
                                                         header: Padding(
                                                           padding:
-                                                              const EdgeInsetsDirectional
+                                                              EdgeInsetsDirectional
                                                                   .fromSTEB(
                                                                       10.0,
                                                                       10.0,
@@ -734,7 +655,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                             children: [
                                                               Padding(
                                                                 padding:
-                                                                    const EdgeInsetsDirectional
+                                                                    EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             0.0,
                                                                             5.0,
@@ -804,11 +725,11 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                         collapsed: Container(),
                                                         expanded: Align(
                                                           alignment:
-                                                              const AlignmentDirectional(
+                                                              AlignmentDirectional(
                                                                   0.0, -1.0),
                                                           child: Padding(
                                                             padding:
-                                                                const EdgeInsetsDirectional
+                                                                EdgeInsetsDirectional
                                                                     .fromSTEB(
                                                                         10.0,
                                                                         0.0,
@@ -844,7 +765,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                       return Container(
                                                                         decoration:
                                                                             BoxDecoration(
-                                                                          boxShadow: const [
+                                                                          boxShadow: [
                                                                             BoxShadow(
                                                                               blurRadius: 3.0,
                                                                               color: Color(0x33000000),
@@ -875,7 +796,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                                 initialExpanded: false,
                                                                                 child: ExpandablePanel(
                                                                                   header: Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
                                                                                     child: Row(
                                                                                       mainAxisSize: MainAxisSize.max,
                                                                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -902,7 +823,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                                   ),
                                                                                   collapsed: Container(),
                                                                                   expanded: Padding(
-                                                                                    padding: const EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
+                                                                                    padding: EdgeInsetsDirectional.fromSTEB(20.0, 0.0, 20.0, 10.0),
                                                                                     child: Builder(
                                                                                       builder: (context) {
                                                                                         final partOptions = offerPartsItem.options.toList();
@@ -930,13 +851,27 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                                                       ),
                                                                                                       if (partOptionsItem.description != '')
                                                                                                         Padding(
-                                                                                                          padding: const EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 4.0, 0.0, 0.0),
                                                                                                           child: Text(
                                                                                                             partOptionsItem.description,
                                                                                                             textAlign: TextAlign.start,
                                                                                                             maxLines: 10,
                                                                                                             style: FlutterFlowTheme.of(context).bodySmall.override(
                                                                                                                   fontFamily: 'Inter',
+                                                                                                                  letterSpacing: 0.0,
+                                                                                                                ),
+                                                                                                          ),
+                                                                                                        ),
+                                                                                                      if (partOptionsIndex < (offerPartsItem.options.length - 1))
+                                                                                                        Padding(
+                                                                                                          padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+                                                                                                          child: Text(
+                                                                                                            'lub',
+                                                                                                            textAlign: TextAlign.start,
+                                                                                                            maxLines: 10,
+                                                                                                            style: FlutterFlowTheme.of(context).bodySmall.override(
+                                                                                                                  fontFamily: 'Inter',
+                                                                                                                  color: FlutterFlowTheme.of(context).secondaryText,
                                                                                                                   letterSpacing: 0.0,
                                                                                                                 ),
                                                                                                           ),
@@ -957,12 +892,12 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                                                   ),
                                                                                               ],
                                                                                             );
-                                                                                          }).divide(const SizedBox(height: 10.0)),
+                                                                                          }),
                                                                                         );
                                                                                       },
                                                                                     ),
                                                                                   ),
-                                                                                  theme: const ExpandableThemeData(
+                                                                                  theme: ExpandableThemeData(
                                                                                     tapHeaderToExpand: true,
                                                                                     tapBodyToExpand: false,
                                                                                     tapBodyToCollapse: false,
@@ -975,7 +910,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                           ),
                                                                         ),
                                                                       );
-                                                                    }).divide(const SizedBox(
+                                                                    }).divide(SizedBox(
                                                                         height:
                                                                             8.0)),
                                                                   );
@@ -985,7 +920,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                           ),
                                                         ),
                                                         theme:
-                                                            const ExpandableThemeData(
+                                                            ExpandableThemeData(
                                                           tapHeaderToExpand:
                                                               true,
                                                           tapBodyToExpand:
@@ -1003,7 +938,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                 ),
                                               ),
                                             );
-                                          }).divide(const SizedBox(height: 8.0)),
+                                          }).divide(SizedBox(height: 8.0)),
                                         );
                                       },
                                     ),
