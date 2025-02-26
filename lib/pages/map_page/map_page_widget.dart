@@ -20,6 +20,9 @@ export 'map_page_model.dart';
 class MapPageWidget extends StatefulWidget {
   const MapPageWidget({super.key});
 
+  static String routeName = 'MapPage';
+  static String routePath = 'mapPage';
+
   @override
   State<MapPageWidget> createState() => _MapPageWidgetState();
 }
@@ -64,7 +67,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
         body: SafeArea(
           top: true,
           child: Align(
-            alignment: const AlignmentDirectional(0.0, 0.0),
+            alignment: AlignmentDirectional(0.0, 0.0),
             child: Row(
               mainAxisSize: MainAxisSize.max,
               mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +120,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                     return Container(
                       width: MediaQuery.sizeOf(context).width * 1.0,
                       height: MediaQuery.sizeOf(context).height * 1.0,
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         maxWidth: 700.0,
                       ),
                       decoration: BoxDecoration(
@@ -130,7 +133,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                             onCameraIdle: (latLng) => safeSetState(
                                 () => _model.placesMapsCenter = latLng),
                             initialLocation: _model.placesMapsCenter ??=
-                                const LatLng(52.237049, 21.017532),
+                                LatLng(52.237049, 21.017532),
                             markers: (functions
                                         .placeDtoListToLatLngList(
                                             (containerSearchQueryResponse
@@ -194,11 +197,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                             desktop: false,
                           ))
                             Align(
-                              alignment: const AlignmentDirectional(-1.0, 1.0),
+                              alignment: AlignmentDirectional(-1.0, 1.0),
                               child: PointerInterceptor(
                                 intercepting: isWeb,
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       20.0, 0.0, 0.0, 20.0),
                                   child: FlutterFlowIconButton(
                                     borderRadius: 30.0,
@@ -225,7 +228,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                             desktop: false,
                           ))
                             Align(
-                              alignment: const AlignmentDirectional(0.0, 1.0),
+                              alignment: AlignmentDirectional(0.0, 1.0),
                               child: PointerInterceptor(
                                 intercepting: isWeb,
                                 child: Builder(
@@ -250,7 +253,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                           ),
                                           child: Padding(
                                             padding:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     10.0, 10.0, 10.0, 10.0),
                                             child: Column(
                                               mainAxisSize: MainAxisSize.min,
@@ -259,11 +262,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                               children: [
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           1.0, 0.0),
                                                   child: Padding(
                                                     padding:
-                                                        const EdgeInsetsDirectional
+                                                        EdgeInsetsDirectional
                                                             .fromSTEB(5.0, 5.0,
                                                                 5.0, 5.0),
                                                     child:
@@ -293,7 +296,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 5.0, 0.0, 2.0),
                                                   child: Text(
@@ -310,16 +313,16 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                 ),
                                                 Align(
                                                   alignment:
-                                                      const AlignmentDirectional(
+                                                      AlignmentDirectional(
                                                           -1.0, 0.0),
                                                   child: ClipRRect(
                                                     child: Container(
                                                       constraints:
-                                                          const BoxConstraints(
+                                                          BoxConstraints(
                                                         maxHeight: 70.0,
                                                       ),
                                                       decoration:
-                                                          const BoxDecoration(),
+                                                          BoxDecoration(),
                                                       child: FutureBuilder<
                                                           ApiCallResponse>(
                                                         future: FFAppState()
@@ -490,7 +493,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                   ),
                                                 ),
                                                 Padding(
-                                                  padding: const EdgeInsetsDirectional
+                                                  padding: EdgeInsetsDirectional
                                                       .fromSTEB(
                                                           0.0, 5.0, 0.0, 0.0),
                                                   child: Text(
@@ -527,7 +530,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                         'SATURDAY',
                                                         'SUNDAY'
                                                       ]),
-                                                      optionLabels: const [
+                                                      optionLabels: [
                                                         'Poniedziałek',
                                                         'Wtorek',
                                                         'Środa',
@@ -587,7 +590,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                       borderWidth: 2.0,
                                                       borderRadius: 8.0,
                                                       margin:
-                                                          const EdgeInsetsDirectional
+                                                          EdgeInsetsDirectional
                                                               .fromSTEB(
                                                                   12.0,
                                                                   0.0,
@@ -619,7 +622,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                             .filteredOpeningHour,
                                                         '-',
                                                       ),
-                                                      icon: const Icon(
+                                                      icon: Icon(
                                                         Icons
                                                             .access_time_outlined,
                                                         size: 18.0,
@@ -628,14 +631,14 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                         width: 100.0,
                                                         height: 40.0,
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     16.0,
                                                                     0.0,
                                                                     16.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
@@ -701,21 +704,21 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                         width: 28.0,
                                                         height: 28.0,
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         iconPadding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     0.0,
                                                                     0.0,
                                                                     0.0),
                                                         color:
-                                                            const Color(0x004B39EF),
+                                                            Color(0x004B39EF),
                                                         textStyle:
                                                             FlutterFlowTheme.of(
                                                                     context)
@@ -749,13 +752,13 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                     Expanded(
                                                       child: Padding(
                                                         padding:
-                                                            const EdgeInsetsDirectional
+                                                            EdgeInsetsDirectional
                                                                 .fromSTEB(
                                                                     0.0,
                                                                     5.0,
                                                                     0.0,
                                                                     0.0),
-                                                        child: SizedBox(
+                                                        child: Container(
                                                           width:
                                                               MediaQuery.sizeOf(
                                                                           context)
@@ -770,7 +773,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                                 EasyDebounce
                                                                     .debounce(
                                                               '_model.textController1',
-                                                              const Duration(
+                                                              Duration(
                                                                   milliseconds:
                                                                       700),
                                                               () async {
@@ -817,7 +820,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                               enabledBorder:
                                                                   OutlineInputBorder(
                                                                 borderSide:
-                                                                    const BorderSide(
+                                                                    BorderSide(
                                                                   color: Color(
                                                                       0x00000000),
                                                                   width: 1.0,
@@ -830,7 +833,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                               focusedBorder:
                                                                   OutlineInputBorder(
                                                                 borderSide:
-                                                                    const BorderSide(
+                                                                    BorderSide(
                                                                   color: Color(
                                                                       0x00000000),
                                                                   width: 1.0,
@@ -892,7 +895,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                                             () {});
                                                                       },
                                                                       child:
-                                                                          const Icon(
+                                                                          Icon(
                                                                         Icons
                                                                             .clear,
                                                                         size:
@@ -944,14 +947,14 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                               ),
                             ),
                           Align(
-                            alignment: const AlignmentDirectional(0.0, 1.0),
+                            alignment: AlignmentDirectional(0.0, 1.0),
                             child: PointerInterceptor(
                               intercepting: isWeb,
                               child: Container(
-                                constraints: const BoxConstraints(
+                                constraints: BoxConstraints(
                                   maxHeight: 350.0,
                                 ),
-                                decoration: const BoxDecoration(),
+                                decoration: BoxDecoration(),
                                 child: Visibility(
                                   visible: responsiveVisibility(
                                     context: context,
@@ -985,14 +988,14 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                 ),
                                               ),
                                             Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       15.0, 15.0, 0.0, 0.0),
                                               child: FlutterFlowIconButton(
                                                 borderColor: Colors.transparent,
                                                 borderRadius: 20.0,
                                                 buttonSize: 40.0,
-                                                fillColor: const Color(0x004B39EF),
+                                                fillColor: Color(0x004B39EF),
                                                 icon: Icon(
                                                   Icons.close,
                                                   color: FlutterFlowTheme.of(
@@ -1037,10 +1040,10 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                 ))
                   Flexible(
                     child: Container(
-                      constraints: const BoxConstraints(
+                      constraints: BoxConstraints(
                         minWidth: 200.0,
                       ),
-                      decoration: const BoxDecoration(),
+                      decoration: BoxDecoration(),
                       child: Visibility(
                         visible: responsiveVisibility(
                           context: context,
@@ -1048,7 +1051,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                           tablet: false,
                         ),
                         child: Padding(
-                          padding: const EdgeInsetsDirectional.fromSTEB(
+                          padding: EdgeInsetsDirectional.fromSTEB(
                               20.0, 0.0, 0.0, 0.0),
                           child: Column(
                             mainAxisSize: MainAxisSize.max,
@@ -1062,7 +1065,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                   borderRadius: BorderRadius.circular(20.0),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsetsDirectional.fromSTEB(
+                                  padding: EdgeInsetsDirectional.fromSTEB(
                                       10.0, 10.0, 10.0, 10.0),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.max,
@@ -1070,7 +1073,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                         CrossAxisAlignment.start,
                                     children: [
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 2.0),
                                         child: Text(
                                           'Kategoria',
@@ -1084,13 +1087,13 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: ClipRRect(
                                           child: Container(
-                                            constraints: const BoxConstraints(
+                                            constraints: BoxConstraints(
                                               maxHeight: 70.0,
                                             ),
-                                            decoration: const BoxDecoration(),
+                                            decoration: BoxDecoration(),
                                             child:
                                                 FutureBuilder<ApiCallResponse>(
                                               future:
@@ -1255,7 +1258,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 5.0, 0.0, 0.0),
                                         child: Text(
                                           'Godzina otwarcia',
@@ -1286,7 +1289,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                               'SATURDAY',
                                               'SUNDAY'
                                             ]),
-                                            optionLabels: const [
+                                            optionLabels: [
                                               'Poniedziałek',
                                               'Wtorek',
                                               'Środa',
@@ -1337,7 +1340,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                             borderWidth: 2.0,
                                             borderRadius: 8.0,
                                             margin:
-                                                const EdgeInsetsDirectional.fromSTEB(
+                                                EdgeInsetsDirectional.fromSTEB(
                                                     12.0, 0.0, 12.0, 0.0),
                                             hidesUnderline: true,
                                             isOverButton: false,
@@ -1361,17 +1364,17 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                               _model.filteredOpeningHour,
                                               '-',
                                             ),
-                                            icon: const Icon(
+                                            icon: Icon(
                                               Icons.access_time_outlined,
                                               size: 18.0,
                                             ),
                                             options: FFButtonOptions(
                                               width: 100.0,
                                               height: 40.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(
                                                       16.0, 0.0, 16.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
                                               color:
                                                   FlutterFlowTheme.of(context)
@@ -1424,11 +1427,11 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                             options: FFButtonOptions(
                                               width: 28.0,
                                               height: 28.0,
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              iconPadding: const EdgeInsetsDirectional
+                                              iconPadding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 0.0, 0.0, 0.0),
-                                              color: const Color(0x004B39EF),
+                                              color: Color(0x004B39EF),
                                               textStyle:
                                                   FlutterFlowTheme.of(context)
                                                       .bodyMedium
@@ -1455,9 +1458,9 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                         children: [
                                           Expanded(
                                             child: Padding(
-                                              padding: const EdgeInsetsDirectional
+                                              padding: EdgeInsetsDirectional
                                                   .fromSTEB(0.0, 5.0, 0.0, 0.0),
-                                              child: SizedBox(
+                                              child: Container(
                                                 width:
                                                     MediaQuery.sizeOf(context)
                                                             .width *
@@ -1470,7 +1473,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                   onChanged: (_) =>
                                                       EasyDebounce.debounce(
                                                     '_model.textController2',
-                                                    const Duration(milliseconds: 700),
+                                                    Duration(milliseconds: 700),
                                                     () async {
                                                       _model
                                                           .searchQuery = _model.textController2
@@ -1505,7 +1508,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                         ),
                                                     enabledBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -1516,7 +1519,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                     ),
                                                     focusedBorder:
                                                         OutlineInputBorder(
-                                                      borderSide: const BorderSide(
+                                                      borderSide: BorderSide(
                                                         color:
                                                             Color(0x00000000),
                                                         width: 1.0,
@@ -1576,7 +1579,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                                                   safeSetState(
                                                                       () {});
                                                                 },
-                                                                child: const Icon(
+                                                                child: Icon(
                                                                   Icons.clear,
                                                                   size: 14.0,
                                                                 ),
@@ -1617,7 +1620,7 @@ class _MapPageWidgetState extends State<MapPageWidget> {
                                       height:
                                           MediaQuery.sizeOf(context).height *
                                               0.55,
-                                      decoration: const BoxDecoration(),
+                                      decoration: BoxDecoration(),
                                       child: wrapWithModel(
                                         model: _model.placeSummaryWidgetModel2,
                                         updateCallback: () =>

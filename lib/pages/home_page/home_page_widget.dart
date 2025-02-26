@@ -2,6 +2,7 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
@@ -12,6 +13,9 @@ export 'home_page_model.dart';
 
 class HomePageWidget extends StatefulWidget {
   const HomePageWidget({super.key});
+
+  static String routeName = 'HomePage';
+  static String routePath = 'homePage';
 
   @override
   State<HomePageWidget> createState() => _HomePageWidgetState();
@@ -83,14 +87,14 @@ class _HomePageWidgetState extends State<HomePageWidget> {
             key: scaffoldKey,
             backgroundColor: FlutterFlowTheme.of(context).primaryBackground,
             body: Align(
-              alignment: const AlignmentDirectional(0.0, 0.0),
+              alignment: AlignmentDirectional(0.0, 0.0),
               child: Container(
                 width: MediaQuery.sizeOf(context).width * 1.0,
                 height: MediaQuery.sizeOf(context).height * 1.0,
-                constraints: const BoxConstraints(
+                constraints: BoxConstraints(
                   maxWidth: 800.0,
                 ),
-                decoration: const BoxDecoration(),
+                decoration: BoxDecoration(),
                 child: SingleChildScrollView(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
@@ -98,8 +102,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.only(
-                          bottomLeft: const Radius.circular(10.0),
-                          bottomRight: const Radius.circular(10.0),
+                          bottomLeft: Radius.circular(10.0),
+                          bottomRight: Radius.circular(10.0),
                           topLeft: Radius.circular(valueOrDefault<double>(
                             () {
                               if (MediaQuery.sizeOf(context).width <
@@ -137,13 +141,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                         child: Container(
                           height: 250.0,
-                          constraints: const BoxConstraints(
+                          constraints: BoxConstraints(
                             maxWidth: 700.0,
                           ),
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.only(
-                              bottomLeft: const Radius.circular(10.0),
-                              bottomRight: const Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0),
+                              bottomRight: Radius.circular(10.0),
                               topLeft: Radius.circular(valueOrDefault<double>(
                                 () {
                                   if (MediaQuery.sizeOf(context).width <
@@ -180,13 +184,13 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                               )),
                             ),
                           ),
-                          child: SizedBox(
+                          child: Container(
                             width: MediaQuery.sizeOf(context).width * 1.0,
                             height: MediaQuery.sizeOf(context).height * 1.0,
                             child: Stack(
                               children: [
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, -1.0),
+                                  alignment: AlignmentDirectional(0.0, -1.0),
                                   child: Image.asset(
                                     'assets/images/Warsaw_Downtown_(1).jpg',
                                     width:
@@ -196,10 +200,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                   ),
                                 ),
                                 Align(
-                                  alignment: const AlignmentDirectional(0.0, 1.0),
+                                  alignment: AlignmentDirectional(0.0, 1.0),
                                   child: Container(
                                     height: 100.0,
-                                    constraints: const BoxConstraints(
+                                    constraints: BoxConstraints(
                                       minWidth: 200.0,
                                       maxWidth: 300.0,
                                     ),
@@ -209,7 +213,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                     child: Align(
-                                      alignment: const AlignmentDirectional(0.0, 0.0),
+                                      alignment: AlignmentDirectional(0.0, 0.0),
                                       child: Text(
                                         'Witaj w\nWarszawie',
                                         textAlign: TextAlign.center,
@@ -231,7 +235,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                       ),
                       Padding(
                         padding:
-                            const EdgeInsetsDirectional.fromSTEB(7.0, 35.0, 0.0, 0.0),
+                            EdgeInsetsDirectional.fromSTEB(7.0, 35.0, 0.0, 0.0),
                         child: Builder(
                           builder: (context) {
                             final sections = PageArrangementDtoStruct.maybeFromMap(
@@ -248,7 +252,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                 final sectionsItem = sections[sectionsIndex];
                                 return Container(
                                   width: MediaQuery.sizeOf(context).width * 1.0,
-                                  decoration: const BoxDecoration(),
+                                  decoration: BoxDecoration(),
                                   child: Column(
                                     mainAxisSize: MainAxisSize.min,
                                     crossAxisAlignment:
@@ -256,7 +260,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     children: [
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Text(
                                           sectionsItem.sectionHeader,
                                           style: FlutterFlowTheme.of(context)
@@ -269,10 +273,10 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                       ),
                                       Align(
                                         alignment:
-                                            const AlignmentDirectional(-1.0, 0.0),
+                                            AlignmentDirectional(-1.0, 0.0),
                                         child: Padding(
                                           padding:
-                                              const EdgeInsetsDirectional.fromSTEB(
+                                              EdgeInsetsDirectional.fromSTEB(
                                                   0.0, 2.0, 0.0, 0.0),
                                           child: Text(
                                             sectionsItem.sectionSubheader,
@@ -286,7 +290,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                         ),
                                       ),
                                       Padding(
-                                        padding: const EdgeInsetsDirectional.fromSTEB(
+                                        padding: EdgeInsetsDirectional.fromSTEB(
                                             0.0, 8.0, 0.0, 0.0),
                                         child: Builder(
                                           builder: (context) {
@@ -315,7 +319,8 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                         Colors.transparent,
                                                     onTap: () async {
                                                       context.pushNamed(
-                                                        'PlaceDetailsPage',
+                                                        PlaceDetailsPageWidget
+                                                            .routeName,
                                                         queryParameters: {
                                                           'placeId':
                                                               serializeParam(
@@ -343,7 +348,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   .circular(
                                                                       10.0),
                                                         ),
-                                                        child: SizedBox(
+                                                        child: Container(
                                                           width:
                                                               MediaQuery.sizeOf(
                                                                           context)
@@ -358,7 +363,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                             children: [
                                                               Align(
                                                                 alignment:
-                                                                    const AlignmentDirectional(
+                                                                    AlignmentDirectional(
                                                                         0.0,
                                                                         -1.0),
                                                                 child:
@@ -411,7 +416,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                               ),
                                                               Align(
                                                                 alignment:
-                                                                    const AlignmentDirectional(
+                                                                    AlignmentDirectional(
                                                                         -1.0,
                                                                         1.0),
                                                                 child:
@@ -429,7 +434,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                   ),
                                                                   child:
                                                                       Padding(
-                                                                    padding: const EdgeInsetsDirectional
+                                                                    padding: EdgeInsetsDirectional
                                                                         .fromSTEB(
                                                                             4.0,
                                                                             4.0,
@@ -458,7 +463,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                                               ),
                                                                         ),
                                                                         Padding(
-                                                                          padding: const EdgeInsetsDirectional.fromSTEB(
+                                                                          padding: EdgeInsetsDirectional.fromSTEB(
                                                                               0.0,
                                                                               2.0,
                                                                               0.0,
@@ -487,7 +492,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                                     ),
                                                   );
                                                 }).divide(
-                                                    const SizedBox(width: 10.0)),
+                                                    SizedBox(width: 10.0)),
                                               ),
                                             );
                                           },
@@ -496,7 +501,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                                     ],
                                   ),
                                 );
-                              }).divide(const SizedBox(height: 25.0)),
+                              }).divide(SizedBox(height: 25.0)),
                             );
                           },
                         ),

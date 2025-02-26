@@ -17,7 +17,7 @@ class LuncherCoreAPIGETContentManagementArrangementsPrimaryGroup {
     String? apibaseurl,
   }) {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
-    return apibaseurl;
+    return '${apibaseurl}';
   }
 
   static Map<String, String> headers = {};
@@ -37,7 +37,7 @@ class GetPrimaryArrangementContentsCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'getPrimaryArrangementContents',
-      apiUrl: '$baseUrl/content-management/arrangements/primary',
+      apiUrl: '${baseUrl}/content-management/arrangements/primary',
       callType: ApiCallType.GET,
       headers: {},
       params: {},
@@ -60,7 +60,7 @@ class LuncherCoreAPIGETPlaceUuidGroup {
     String? apibaseurl,
   }) {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
-    return apibaseurl;
+    return '${apibaseurl}';
   }
 
   static Map<String, String> headers = {};
@@ -80,10 +80,10 @@ class GetByIdCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'getById',
-      apiUrl: '$baseUrl/place/$uuid',
+      apiUrl: '${baseUrl}/place/${uuid}',
       callType: ApiCallType.GET,
       headers: {
-        'Authorization': 'Bearer $authorization',
+        'Authorization': 'Bearer ${authorization}',
       },
       params: {},
       returnBody: true,
@@ -105,7 +105,7 @@ class LuncherCoreAPIPOSTPlaceSearchGroup {
     String? apibaseurl,
   }) {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
-    return apibaseurl;
+    return '${apibaseurl}';
   }
 
   static Map<String, String> headers = {};
@@ -149,23 +149,26 @@ class SearchQueryCall {
     "day": "${escapeStringForJson(openAtDay)}"
   },
   "location": {
-    "latitude": $locationLatitude,
-    "longitude": $locationLongitude,
-    "radius": $locationRadius
+    "latitude": ${locationLatitude},
+    "longitude": ${locationLongitude},
+    "radius": ${locationRadius}
   },
   "hasLunchServedAt": "${escapeStringForJson(hasLunchServedAt)}",
-  "page": $page,
-  "size": $size
+  "page": ${page},
+  "size": ${size}
 }''';
     return FFApiInterceptor.makeApiCall(
+      // ignore: prefer_const_constructors - can be mutated by interceptors
       ApiCallOptions(
         callName: 'searchQuery',
-        apiUrl: '$baseUrl/place/search',
+        apiUrl: '${baseUrl}/place/search',
         callType: ApiCallType.POST,
+        // ignore: prefer_const_literals_to_create_immutables - can be mutated by interceptors
         headers: {
-          'Authorization': 'Bearer $authorization',
+          'Authorization': 'Bearer ${authorization}',
         },
-        params: const {},
+        // ignore: prefer_const_literals_to_create_immutables - can be mutated by interceptors
+        params: {},
         body: ffApiRequestBody,
         bodyType: BodyType.JSON,
         returnBody: true,
@@ -175,6 +178,7 @@ class SearchQueryCall {
         isStreamingApi: false,
         alwaysAllowBody: false,
       ),
+
       interceptors,
     );
   }
@@ -193,7 +197,7 @@ class LuncherCoreAPIGETPlacetypeGroup {
     String? apibaseurl,
   }) {
     apibaseurl ??= FFDevEnvironmentValues().apibaseurl;
-    return apibaseurl;
+    return '${apibaseurl}';
   }
 
   static Map<String, String> headers = {};
@@ -211,7 +215,7 @@ class GetAllPlaceTypesCall {
 
     return ApiManager.instance.makeApiCall(
       callName: 'getAllPlaceTypes',
-      apiUrl: '$baseUrl/placetype',
+      apiUrl: '${baseUrl}/placetype',
       callType: ApiCallType.GET,
       headers: {},
       params: {},

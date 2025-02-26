@@ -5,9 +5,10 @@ import 'package:provider/provider.dart';
 
 import '/backend/schema/structs/index.dart';
 
-import '/index.dart';
 import '/main.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+
+import '/index.dart';
 
 export 'package:go_router/go_router.dart';
 export 'serialization_util.dart';
@@ -35,30 +36,30 @@ GoRouter createRouter(AppStateNotifier appStateNotifier) => GoRouter(
       debugLogDiagnostics: true,
       refreshListenable: appStateNotifier,
       navigatorKey: appNavigatorKey,
-      errorBuilder: (context, state) => const NavBarPage(),
+      errorBuilder: (context, state) => NavBarPage(),
       routes: [
         FFRoute(
           name: '_initialize',
           path: '/',
-          builder: (context, _) => const NavBarPage(),
+          builder: (context, _) => NavBarPage(),
           routes: [
             FFRoute(
-              name: 'HomePage',
-              path: 'homePage',
+              name: HomePageWidget.routeName,
+              path: HomePageWidget.routePath,
               builder: (context, params) => params.isEmpty
-                  ? const NavBarPage(initialPage: 'HomePage')
-                  : const HomePageWidget(),
+                  ? NavBarPage(initialPage: 'HomePage')
+                  : HomePageWidget(),
             ),
             FFRoute(
-              name: 'MapPage',
-              path: 'mapPage',
+              name: MapPageWidget.routeName,
+              path: MapPageWidget.routePath,
               builder: (context, params) => params.isEmpty
-                  ? const NavBarPage(initialPage: 'MapPage')
-                  : const MapPageWidget(),
+                  ? NavBarPage(initialPage: 'MapPage')
+                  : MapPageWidget(),
             ),
             FFRoute(
-              name: 'PlaceDetailsPage',
-              path: 'placeDetails',
+              name: PlaceDetailsPageWidget.routeName,
+              path: PlaceDetailsPageWidget.routePath,
               builder: (context, params) => PlaceDetailsPageWidget(
                 placeId: params.getParam(
                   'placeId',
@@ -232,7 +233,7 @@ class TransitionInfo {
   final Duration duration;
   final Alignment? alignment;
 
-  static TransitionInfo appDefault() => const TransitionInfo(hasTransition: false);
+  static TransitionInfo appDefault() => TransitionInfo(hasTransition: false);
 }
 
 class RootPageContext {
