@@ -52,6 +52,26 @@ List<LatLng>? placeDtoListToLatLngList(List<PlaceDtoStruct>? places) {
       .toList();
 }
 
+String? showDateAsPolishDaysOfWeek(
+  String? startDate,
+  String? endDate,
+) {
+  if (startDate == null || endDate == null) return null;
+  DateTime? s = DateTime.tryParse(startDate);
+  DateTime? e = DateTime.tryParse(endDate);
+  if (s == null || e == null) return "";
+  var days = ['Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.', 'Nd.'];
+  var endDay = "";
+  if (!(s.day == e.day && s.month == e.month && s.year == e.year))
+    endDay = days[e.weekday - 1] + " ";
+  return days[s.weekday - 1] +
+      " " +
+      DateFormat.Hm().format(s) +
+      " - " +
+      endDay +
+      DateFormat.Hm().format(e);
+}
+
 String? addressDtoToString(AddressDtoStruct? addr) {
   return addr == null
       ? null
@@ -221,4 +241,28 @@ String? replaceSchemaOfUrl(
     return null;
   }
   return url.replaceRange(0, url.indexOf("://"), targetSchema);
+}
+
+String? compareDatesAndReturnPolishDay(
+  String? startDate,
+  String? endDate,
+  bool returnStartData,
+  bool forceDayShown,
+) {
+  if (startDate == null || endDate == null) return null;
+  DateTime? s = DateTime.tryParse(startDate);
+  DateTime? e = DateTime.tryParse(endDate);
+  if (returnStartData && s == null ||
+      !returnStartData && e == null ||
+      s == null && e == null) return "";
+  if (!forceDayShown &&
+      s != null &&
+      e != null &&
+      s.day == e.day &&
+      s.month == e.month &&
+      s.year == e.year) return DateFormat.Hm().format(returnStartData ? s : e);
+  var days = ['Pon.', 'Wt.', 'Śr.', 'Czw.', 'Pt.', 'Sob.', 'Nd.'];
+  return days[(returnStartData ? s!.weekday : e!.weekday) - 1] +
+      " " +
+      DateFormat.Hm().format(returnStartData ? s! : e!);
 }
