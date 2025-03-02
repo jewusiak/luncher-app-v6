@@ -2,16 +2,20 @@ import '/backend/api_requests/api_calls.dart';
 import '/backend/schema/structs/index.dart';
 import '/components/no_data_available_component_widget.dart';
 import '/components/opening_time_wrap_widget.dart';
+import '/flutter_flow/flutter_flow_expanded_image_view.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:auto_size_text/auto_size_text.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_blurhash/flutter_blurhash.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:octo_image/octo_image.dart';
 import 'package:share_plus/share_plus.dart';
 import 'place_details_page_model.dart';
 export 'place_details_page_model.dart';
@@ -378,7 +382,85 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                             (context, imagesListIndex, _) {
                                           final imagesListItem =
                                               imagesList[imagesListIndex];
-                                          return Container();
+                                          return InkWell(
+                                            splashColor: Colors.transparent,
+                                            focusColor: Colors.transparent,
+                                            hoverColor: Colors.transparent,
+                                            highlightColor: Colors.transparent,
+                                            onTap: () async {
+                                              await Navigator.push(
+                                                context,
+                                                PageTransition(
+                                                  type: PageTransitionType.fade,
+                                                  child:
+                                                      FlutterFlowExpandedImageView(
+                                                    image: OctoImage(
+                                                      placeholderBuilder: (_) =>
+                                                          SizedBox.expand(
+                                                        child: Image(
+                                                          image: BlurHashImage(
+                                                              imagesListItem
+                                                                  .blurHash),
+                                                          fit: BoxFit.cover,
+                                                        ),
+                                                      ),
+                                                      image:
+                                                          CachedNetworkImageProvider(
+                                                        imagesListItem
+                                                            .accessUrl,
+                                                      ),
+                                                      fit: BoxFit.contain,
+                                                      errorBuilder: (context,
+                                                              error,
+                                                              stackTrace) =>
+                                                          Image.asset(
+                                                        'assets/images/error_image.png',
+                                                        fit: BoxFit.contain,
+                                                      ),
+                                                    ),
+                                                    allowRotation: false,
+                                                    tag: imagesListItem
+                                                        .accessUrl,
+                                                    useHeroAnimation: true,
+                                                  ),
+                                                ),
+                                              );
+                                            },
+                                            child: Hero(
+                                              tag: imagesListItem.accessUrl,
+                                              transitionOnUserGestures: true,
+                                              child: ClipRRect(
+                                                borderRadius:
+                                                    BorderRadius.circular(8.0),
+                                                child: OctoImage(
+                                                  placeholderBuilder: (_) =>
+                                                      SizedBox.expand(
+                                                    child: Image(
+                                                      image: BlurHashImage(
+                                                          imagesListItem
+                                                              .blurHash),
+                                                      fit: BoxFit.cover,
+                                                    ),
+                                                  ),
+                                                  image:
+                                                      CachedNetworkImageProvider(
+                                                    imagesListItem.accessUrl,
+                                                  ),
+                                                  width: 200.0,
+                                                  height: 105.0,
+                                                  fit: BoxFit.cover,
+                                                  errorBuilder: (context, error,
+                                                          stackTrace) =>
+                                                      Image.asset(
+                                                    'assets/images/error_image.png',
+                                                    width: 200.0,
+                                                    height: 105.0,
+                                                    fit: BoxFit.cover,
+                                                  ),
+                                                ),
+                                              ),
+                                            ),
+                                          );
                                         },
                                         carouselController:
                                             _model.carouselController ??=
@@ -565,7 +647,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                   child: Text(
                                     'Oferty lunchowe',
                                     style: FlutterFlowTheme.of(context)
-                                        .titleMedium
+                                        .titleLarge
                                         .override(
                                           fontFamily: 'Montserrat',
                                           letterSpacing: 0.0,
@@ -676,7 +758,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                           16.0,
                                                                       style: FlutterFlowTheme.of(
                                                                               context)
-                                                                          .titleMedium
+                                                                          .titleLarge
                                                                           .override(
                                                                             fontFamily:
                                                                                 'Montserrat',
@@ -687,12 +769,23 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                     if (menuOffersItem
                                                                         .beingServed)
                                                                       Text(
-                                                                        'Aktualnie serwowana!',
+                                                                        'Serwujemy teraz! ${functions.showDateAsPolishDaysOfWeek(menuOffersItem.thisOrNextServingRange.startTime, menuOffersItem.thisOrNextServingRange.endTime)}',
                                                                         style: FlutterFlowTheme.of(context)
                                                                             .bodyMedium
                                                                             .override(
                                                                               fontFamily: 'Inter',
-                                                                              color: menuOffersItem.beingServed ? FlutterFlowTheme.of(context).success : FlutterFlowTheme.of(context).primaryText,
+                                                                              letterSpacing: 0.0,
+                                                                              fontWeight: FontWeight.w600,
+                                                                            ),
+                                                                      ),
+                                                                    if (!menuOffersItem
+                                                                        .beingServed)
+                                                                      Text(
+                                                                        'Dostępna od ${functions.showDateAsPolishDaysOfWeek(menuOffersItem.thisOrNextServingRange.startTime, menuOffersItem.thisOrNextServingRange.endTime)}',
+                                                                        style: FlutterFlowTheme.of(context)
+                                                                            .labelMedium
+                                                                            .override(
+                                                                              fontFamily: 'Inter',
                                                                               letterSpacing: 0.0,
                                                                             ),
                                                                       ),
@@ -700,12 +793,17 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                 ),
                                                               ),
                                                               Text(
-                                                                '${menuOffersItem.basePrice.amount.toString()} ${valueOrDefault<String>(
-                                                                  menuOffersItem
-                                                                      .basePrice
-                                                                      .currencyCode,
-                                                                  'PLN',
-                                                                )}',
+                                                                menuOffersItem
+                                                                            .basePrice
+                                                                            .amount ==
+                                                                        0.0
+                                                                    ? ''
+                                                                    : '${menuOffersItem.basePrice.amount.toString()} ${valueOrDefault<String>(
+                                                                        menuOffersItem
+                                                                            .basePrice
+                                                                            .currencyCode,
+                                                                        'PLN',
+                                                                      )}',
                                                                 textAlign:
                                                                     TextAlign
                                                                         .end,
@@ -793,7 +891,7 @@ class _PlaceDetailsPageWidgetState extends State<PlaceDetailsPageWidget> {
                                                                               width: double.infinity,
                                                                               color: FlutterFlowTheme.of(context).secondaryBackground,
                                                                               child: ExpandableNotifier(
-                                                                                initialExpanded: false,
+                                                                                initialExpanded: true,
                                                                                 child: ExpandablePanel(
                                                                                   header: Padding(
                                                                                     padding: EdgeInsetsDirectional.fromSTEB(10.0, 10.0, 10.0, 10.0),
