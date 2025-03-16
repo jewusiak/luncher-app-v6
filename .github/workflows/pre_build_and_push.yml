@@ -29,7 +29,7 @@ jobs:
 
       - name: Build docker Image
         id: docker-build
-        run: 'docker build -t ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} --file=".deployment/Dockerfile-pro" .'
+        run: 'docker build -t ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} --file=".deployment/Dockerfile-pre" .'
 
       - name: Push Docker image
         run: 'docker push ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}'
