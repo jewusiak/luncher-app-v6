@@ -1,4 +1,4 @@
-name: Build and push (PRO)
+name: Build and push (PRE)
 
 on:
   workflow_dispatch:
