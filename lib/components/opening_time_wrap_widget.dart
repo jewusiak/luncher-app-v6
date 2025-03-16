@@ -54,7 +54,7 @@ class _OpeningTimeWrapWidgetState extends State<OpeningTimeWrapWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
+      padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 10.0),
       child: Wrap(
         spacing: 0.0,
         runSpacing: 5.0,
@@ -72,8 +72,8 @@ class _OpeningTimeWrapWidgetState extends State<OpeningTimeWrapWidget> {
             style: FlutterFlowTheme.of(context).bodyLarge.override(
                   fontFamily: 'Inter',
                   color: _model.openingInfo?.openState == OpeningState.OPEN
-                      ? const Color(0xFF28AB3C)
-                      : const Color(0xFFB41621),
+                      ? Color(0xFF28AB3C)
+                      : Color(0xFFB41621),
                   letterSpacing: 0.0,
                   fontWeight: FontWeight.w600,
                 ),

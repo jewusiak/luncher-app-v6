@@ -5,6 +5,7 @@ import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/custom_functions.dart' as functions;
+import '/index.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:cached_network_image/cached_network_image.dart';
@@ -60,7 +61,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
       duration: 300.0.ms,
       curve: Curves.easeInOut,
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 300),
+        duration: Duration(milliseconds: 300),
         curve: Curves.easeInOut,
         width: MediaQuery.sizeOf(context).width * 1.0,
         height: MediaQuery.sizeOf(context).height * 1.0,
@@ -69,14 +70,14 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
           borderRadius: BorderRadius.circular(20.0),
         ),
         child: Padding(
-          padding: const EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
+          padding: EdgeInsetsDirectional.fromSTEB(15.0, 15.0, 15.0, 15.0),
           child: Column(
             mainAxisSize: MainAxisSize.max,
             children: [
               Align(
-                alignment: const AlignmentDirectional(1.0, 0.0),
+                alignment: AlignmentDirectional(1.0, 0.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 0.0, 0.0, 10.0),
                   child: FlutterFlowIconButton(
                     borderColor: Colors.transparent,
                     borderRadius: 20.0,
@@ -90,7 +91,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                     onPressed: () async {
                       if (widget.selectedPlace != null) {
                         context.pushNamed(
-                          'PlaceDetailsPage',
+                          PlaceDetailsPageWidget.routeName,
                           queryParameters: {
                             'placeId': serializeParam(
                               widget.selectedPlace?.id,
@@ -113,7 +114,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                           ?.toList() ??
                       [];
 
-                  return SizedBox(
+                  return Container(
                     width: double.infinity,
                     height: 129.0,
                     child: CarouselSlider.builder(
@@ -209,9 +210,9 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                 },
               ),
               Align(
-                alignment: const AlignmentDirectional(0.0, -1.0),
+                alignment: AlignmentDirectional(0.0, -1.0),
                 child: Padding(
-                  padding: const EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
+                  padding: EdgeInsetsDirectional.fromSTEB(0.0, 20.0, 0.0, 0.0),
                   child: InkWell(
                     splashColor: Colors.transparent,
                     focusColor: Colors.transparent,
@@ -220,7 +221,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                     onTap: () async {
                       if (widget.selectedPlace != null) {
                         context.pushNamed(
-                          'PlaceDetailsPage',
+                          PlaceDetailsPageWidget.routeName,
                           queryParameters: {
                             'placeId': serializeParam(
                               widget.selectedPlace?.id,
@@ -259,7 +260,7 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                     ),
               ),
               Padding(
-                padding: const EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
+                padding: EdgeInsetsDirectional.fromSTEB(0.0, 10.0, 0.0, 0.0),
                 child: Wrap(
                   spacing: 0.0,
                   runSpacing: 5.0,
@@ -281,8 +282,8 @@ class _PlaceSummaryWidgetWidgetState extends State<PlaceSummaryWidgetWidget> {
                             color: (widget.openingInfo != null) &&
                                     (widget.openingInfo?.openState ==
                                         OpeningState.OPEN)
-                                ? const Color(0xFF28AB3C)
-                                : const Color(0xFFB41621),
+                                ? Color(0xFF28AB3C)
+                                : Color(0xFFB41621),
                             letterSpacing: 0.0,
                             fontWeight: FontWeight.w600,
                           ),
