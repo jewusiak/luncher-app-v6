@@ -7,7 +7,7 @@ on:
 
 env:
   APP_NAME: "luncher-app"
-  ENV_SUFFIX: "-pre"
+  ENV_SUFFIX: "-pro"
 
 
   DCKR_HUB_USER: "jewusiak"
@@ -29,7 +29,7 @@ jobs:
 
       - name: Build docker Image
         id: docker-build
-        run: 'docker build -t ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} --file=".deployment/Dockerfile-pre" .'
+        run: 'docker build -t ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }} --file=".deployment/Dockerfile-pro" .'
 
       - name: Push Docker image
         run: 'docker push ${{env.DCKR_HUB_USER}}/${{env.DCKR_HUB_REPO}}:${{ env.APP_NAME }}${{ env.ENV_SUFFIX }}'
