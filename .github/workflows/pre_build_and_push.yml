@@ -12,6 +12,12 @@ env:
 
   DCKR_HUB_USER: "jewusiak"
   DCKR_HUB_REPO: "luncher"
+  
+  ENV_VARS_JSON: '
+     {
+       "apibaseurl": "https://api.pre.luncher.pl"
+     }
+     '
 
 jobs:
   build_app:
@@ -24,6 +30,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: Setup jq
+        uses: vegardit/gha-setup-jq@v1
+
+      - name: Override properties in environment.json
+        run: |
+          echo '${{env.ENV_VARS_JSON}}' > .deployment/ovrrd.tmp.json
+          bash .deployment/merge_jsons.sh assets/environment_values/environment.json .deployment/ovrrd.tmp.json assets/environment_values/environment2.json
+          mv assets/environment_values/environment2.json assets/environment_values/environment.json
+      
+      
       - name: Authenticate in Docker Hub
         run: 'docker login -u ${{env.DCKR_HUB_USER}} -p ${{ secrets.DCKR_HUB_PAT }}'
 
